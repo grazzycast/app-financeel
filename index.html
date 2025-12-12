@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financeel Track - Rastreamento de Carteira</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/financeel-icon.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <h1>Financeel <span>Track</span></h1>
+            </div>
+            <p class="subtitle">Acompanhe o valor da sua carteira de ações diariamente</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card">
+                <h2><i class="fas fa-plus-circle"></i> Adicionar Ação</h2>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="stockCode"><i class="fas fa-tag"></i> Código da Ação</label>
+                        <input type="text" id="stockCode" placeholder="Ex: PETR4, VALE3, ITUB4" maxlength="10">
+                        <small class="hint">Use o código da B3 (ex: PETR4, VALE3)</small>
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="stockQuantity"><i class="fas fa-layer-group"></i> Quantidade</label>
+                        <input type="number" id="stockQuantity" placeholder="Ex: 100" min="1" value="100">
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="stockPrice"><i class="fas fa-dollar-sign"></i> Preço Médio (R$)</label>
+                        <input type="number" id="stockPrice" step="0.01" placeholder="Ex: 32.50" min="0.01">
+                        <small class="hint">Opcional - para calcular lucro/prejuízo</small>
+                    </div>
+                    
+                    <button id="addStockBtn" class="btn-primary">
+                        <i class="fas fa-plus"></i> Adicionar à Carteira
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-wallet"></i> Minha Carteira</h2>
+                
+                <div class="portfolio-header">
+                    <div class="total-value">
+                        <h3>Valor Total da Carteira</h3>
+                        <div class="amount" id="totalPortfolioValue">R$ 0,00</div>
+                    </div>
+                    
+                    <div class="daily-change">
+                        <h3>Variação Hoje</h3>
+                        <div class="amount positive" id="dailyChange">+ R$ 0,00 (0.00%)</div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="portfolioTable">
+                        <thead>
+                            <tr>
+                                <th>Ação</th>
+                                <th>Quantidade</th>
+                                <th>Preço Atual</th>
+                                <th>Valor Investido</th>
+                                <th>Valor Atual</th>
+                                <th>Variação</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="portfolioBody">
+                            <!-- Ações serão inseridas aqui via JavaScript -->
+                            <tr class="empty-row">
+                                <td colspan="7">
+                                    <i class="fas fa-box-open"></i>
+                                    <p>Sua carteira está vazia. Adicione suas ações para começar!</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="portfolio-actions">
+                    <button id="refreshBtn" class="btn-secondary">
+                        <i class="fas fa-sync-alt"></i> Atualizar Cotações
+                    </button>
+                    <button id="saveBtn" class="btn-secondary">
+                        <i class="fas fa-save"></i> Salvar Carteira
+                    </button>
+                    <button id="clearBtn" class="btn-danger">
+                        <i class="fas fa-trash"></i> Limpar Tudo
+                    </button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-chart-pie"></i> Distribuição da Carteira</h2>
+                <div class="chart-container">
+                    <canvas id="portfolioChart"></canvas>
+                </div>
+                <div class="legend" id="chartLegend"></div>
+            </div>
+
+            <div class="info-card">
+                <h3><i class="fas fa-lightbulb"></i> Como Funciona</h3>
+                <ul>
+                    <li><strong>Preços em tempo real:</strong> Usamos cotações simuladas da B3</li>
+                    <li><strong>Armazenamento local:</strong> Sua carteira fica salva no navegador</li>
+                    <li><strong>Ações suportadas:</strong> Todas as ações da B3 (ex: PETR4, VALE3, BBDC4)</li>
+                    <li><strong>Atualização:</strong> Clique em "Atualizar Cotações" para ver os valores do dia</li>
+                </ul>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p><strong>Aviso:</strong> Este é um projeto demonstrativo. Os preços são simulados e não representam valores reais de negociação.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Financeel Track - Projeto demonstrativo para fins educacionais</p>
+            <p class="footer-links">
+                <a href="#"><i class="fab fa-github"></i> Código Fonte</a> | 
+                <a href="#"><i class="fas fa-question-circle"></i> Ajuda</a> | 
+                <a href="#"><i class="fas fa-envelope"></i> Contato</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
